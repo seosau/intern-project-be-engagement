@@ -36,11 +36,11 @@ export class JobProcessor implements OnModuleInit {
           if(isLiked) {
             await this.likeService.remove(postId, userId)
             const count = await this.likeService.countLike(postId)
-            if (typeof(count) === 'number') this.jobQueue.addLikeCountJob(postId, count)
+            if (typeof(count) === 'number') this.jobQueue.addLikeCountJob(postId, userId, count)
           } else {
             await this.likeService.create(postId, userId)
             const count = await this.likeService.countLike(postId)
-            if (typeof(count) === 'number') this.jobQueue.addLikeCountJob(postId, count)
+            if (typeof(count) === 'number') this.jobQueue.addLikeCountJob(postId, userId, count)
           }
           console.log('Processed job in: ', Date.now() - ms, ' ms');
         } catch (error) {

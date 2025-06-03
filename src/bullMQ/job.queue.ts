@@ -23,7 +23,7 @@ export class JobQueue {
         })
     }
 
-    async addLikeCountJob(postId: string, count: Number) {
-        const resq = await this.likeCountQueue.add(LIKE_COUNT, {postId, count})
+    async addLikeCountJob(postId: string, userId: string, count: Number) {
+        const resq = await this.likeCountQueue.add(LIKE_COUNT, {postId, userId, count})
     }
 }
