@@ -29,7 +29,7 @@ export class JobProcessor implements OnModuleInit {
       TOGGLE_LIKE,
       async (job) => {
         try {
-          console.log('Start Processing job: ', job.name, job.data);
+          console.log('Start Processing job in like service: ', job.name, job.data);
           const ms = Date.now();
           const { postId, userId } = job.data;
           const isLiked = await this.likeService.isLiked(postId, userId)
@@ -42,9 +42,9 @@ export class JobProcessor implements OnModuleInit {
             const count = await this.likeService.countLike(postId)
             if (typeof(count) === 'number') this.jobQueue.addLikeCountJob(postId, userId, count)
           }
-          console.log('Processed job in: ', Date.now() - ms, ' ms');
+          console.log('Processed job in like service in: ', Date.now() - ms, ' ms');
         } catch (error) {
-          console.error('Error processing resize job:', error);
+          console.error('Error processing resize job in like service:', error);
           throw error
         }
       },
